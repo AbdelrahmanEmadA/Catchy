@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catchy | Ad & Social Media Design Specialists</title>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & GLOBAL STYLES --- */
+        :root {
+            --primary-color: #F44336;
+            --background-color: #FFF8F0;
+            --text-color: #333;
+            --white: #FFFFFF;
+            --dark-grey: #222;
+            --font-family: 'Poppins', sans-serif;
+            --container-width: 1200px;
+            --border-radius: 12px; 
+            --transition-speed: 0.5s;
+            --transition-timing: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-family); background-color: var(--background-color); color: var(--text-color); line-height: 1.6; }
+        body.lightbox-open { overflow: hidden; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
+        .section-title { font-size: 2.8rem; font-weight: 800; text-align: center; margin-bottom: 60px; color: var(--dark-grey); }
+
+        /* --- HERO & NAVBAR --- */
+        .hero-section { min-height: 100vh; background: var(--background-color); display: flex; flex-direction: column; color: var(--dark-grey); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; }
+        .logo { font-size: 1.8rem; font-weight: 800; text-decoration: none; color: var(--primary-color); }
+        .nav-links a { margin: 0 20px; text-decoration: none; font-weight: 500; color: var(--text-color); transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary-color); }
+        .hero-content { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+        .hero-headline { font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 800; line-height: 1.1; max-width: 950px; }
+        .hero-subheadline { font-size: 1.2rem; max-width: 600px; margin: 20px 0 30px; }
+        .cta-button { background-color: var(--primary-color); color: var(--white); padding: 15px 35px; font-size: 1.1rem; font-weight: 600; text-decoration: none; border-radius: 50px; transition: transform 0.3s, box-shadow 0.3s; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .scroll-down-icon { margin-top: 50px; font-size: 1.5rem; color: var(--dark-grey); animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-15px); } 60% { transform: translateY(-5px); } }
+
+        /* --- INFINITE MARQUEE PORTFOLIO --- */
+        .portfolio-marquee-section { 
+            padding: 100px 0; 
+            background: var(--background-color); 
+            overflow: hidden; 
+        }
+        .marquee-container { display: flex; flex-direction: column; gap: 30px; }
+        .marquee__row { display: flex; }
+        .marquee__content { display: flex; gap: 30px; flex-shrink: 0; animation: linear infinite; }
+        .marquee-container:hover .marquee__content,
+        .marquee-container.focus-locked .marquee__content {
+             animation-play-state: paused;
+        }
+        @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+        .marquee__row--1 .marquee__content { animation-name: scroll-left; animation-duration: 80s; }
+        .marquee__row--2 .marquee__content { animation-name: scroll-right; animation-duration: 95s; }
+        .marquee__row--3 .marquee__content { animation-name: scroll-left; animation-duration: 70s; }
+
+        .marquee__item {
+            position: relative; height: 350px; flex-shrink: 0;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+            cursor: pointer;
+            transition: transform var(--transition-speed) var(--transition-timing), 
+                        filter var(--transition-speed) var(--transition-timing),
+                        box-shadow var(--transition-speed) var(--transition-timing);
+        }
+        
+        /* --- THE COMBINED FOCUS EFFECT --- */
+        .marquee-container:not(.focus-locked):hover .marquee__item {
+            filter: blur(4px) brightness(0.6);
+            transform: scale(0.98);
+        }
+        .marquee-container:not(.focus-locked) .marquee__item:hover {
+            transform: scale(1.8);
+            filter: blur(0px) brightness(1);
+            z-index: 100;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+        }
+        
+        .aspect-16-9 { aspect-ratio: 16 / 9; } .aspect-3-4 { aspect-ratio: 3 / 4; } .aspect-1-1 { aspect-ratio: 1 / 1; }
+        .marquee__item img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--border-radius); }
+        
+        /* --- FULL SCREEN LIGHTBOX STYLES --- */
+        .lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); z-index: 2000;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .lightbox.active { opacity: 1; pointer-events: all; }
+        .lightbox__image {
+            display: block; max-width: 90%; max-height: 90%;
+            object-fit: contain; box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            border-radius: var(--border-radius); transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer; 
+        }
+        .lightbox.active .lightbox__image { transform: scale(1); }
+        .lightbox__close {
+            position: absolute; top: 20px; right: 30px;
+            font-size: 3rem; color: var(--white); background: none;
+            border: none; cursor: pointer; line-height: 1;
+        }
+        
+        /* --- OTHER SECTIONS (Condensed) --- */
+        .services-section { padding: 80px 0; background-color: #fff; } .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 900px; margin: 0 auto; } .service-card { background: var(--white); padding: 40px; border-radius: var(--border-radius); text-align: center; border: 1px solid #eee; transition: transform 0.3s, box-shadow 0.3s; } .service-card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); } .service-icon { font-size: 3.5rem; margin-bottom: 25px; color: var(--primary-color); } .service-card h3 { font-size: 1.8rem; margin-bottom: 15px; } .service-card p { font-size: 1.05rem; line-height: 1.7; } .why-us-section { padding: 80px 0; } .why-us-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; text-align: center; } .why-us-item i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; } .why-us-item h3 { font-size: 1.5rem; margin-bottom: 10px; } .client-logos-section { padding: 40px 0; background-color: var(--background-color); } .client-logos-title { text-align: center; font-weight: 500; color: #999; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; } .logos-slider { display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 30px; font-size: 2.5rem; color: #ccc; } .logos-slider i:hover { color: var(--text-color); } .cta-section { padding: 80px 20px; background: var(--primary-color); text-align: center; color: var(--white); } .cta-section h2 { font-size: 2.8rem; font-weight: 700; margin-bottom: 30px; } .cta-button-dark { background-color: var(--dark-grey); color: var(--white); padding: 15px 35px; font-size: 1.1rem; font-weight: 600; text-decoration: none; border-radius: 50px; transition: background-color 0.3s, transform 0.3s; } .cta-button-dark:hover { background-color: #000; transform: translateY(-3px); } .sticky-contact-buttons { position: fixed; bottom: 30px; right: 30px; z-index: 1000; display: flex; flex-direction: column; gap: 10px; } .sticky-btn { width: 50px; height: 50px; border-radius: 50%; color: var(--white); display: flex; justify-content: center; align-items: center; font-size: 1.5rem; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.15); transition: transform 0.3s; } .sticky-btn:hover { transform: scale(1.1); } .whatsapp { background-color: #25D366; } .email { background-color: var(--primary-color); } .footer { background: var(--dark-grey); color: #aaa; padding: 60px 0 20px; } .footer-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; } .footer-logo { font-size: 1.8rem; font-weight: 800; color: var(--primary-color); } .footer-links a { color: #aaa; text-decoration: none; margin: 0 15px; transition: color 0.3s; } .footer-links a:hover { color: var(--white); } .footer-socials a { color: #aaa; text-decoration: none; font-size: 1.2rem; margin-left: 20px; transition: color 0.3s; } .footer-socials a:hover { color: var(--primary-color); } .footer-bottom { text-align: center; border-top: 1px solid #444; padding-top: 20px; font-size: 0.9rem; }
+        
+        @media (max-width: 768px) { 
+            .navbar { flex-direction: column; gap: 15px; } 
+            .hero-headline { font-size: 2.8rem; } 
+            .marquee__item { height: 250px; } 
+            .marquee-container, .marquee__content { gap: 20px; } 
+            .marquee-container:not(.focus-locked) .marquee__item:hover { transform: none; } 
+        }
+
+        @media (max-width: 480px) { 
+            .nav-links { display: none; } 
+            .hero-headline { font-size: 2.2rem; } 
+            .marquee__item { height: 200px; } 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Hero Section -->
+    <header class="hero-section">
+        <nav class="navbar"><a href="#" class="logo">Catchy</a><div class="nav-links"><a href="#portfolio">Portfolio</a><a href="#services">Services</a><a href="#contact">Contact</a></div></nav>
+        <div class="hero-content"><h1 class="hero-headline">Designs That Stick. Stories That Sell.</h1><p class="hero-subheadline">We create bold, fast, and catchy visuals for any brand, product, or platform.</p><a href="#contact" class="cta-button">Let’s Make It Catchy</a><a href="#portfolio" class="scroll-down-icon"><i class="fas fa-arrow-down"></i></a></div>
+    </header>
+
+    <main>
+        <!-- ****** DYNAMIC INFINITE MARQUEE PORTFOLIO ****** -->
+        <section id="portfolio" class="portfolio-marquee-section">
+            <div class="container"><h2 class="section-title">A Universe of Creativity</h2></div>
+            <div class="marquee-container">
+                <div class="marquee__row marquee__row--1"><div class="marquee__content" id="marquee-content-1"></div></div>
+                <div class="marquee__row marquee__row--2"><div class="marquee__content" id="marquee-content-2"></div></div>
+                <div class="marquee__row marquee__row--3"><div class="marquee__content" id="marquee-content-3"></div></div>
+            </div>
+        </section>
+
+        <!-- Other sections -->
+        <section id="services" class="services-section"> <div class="container"> <h2 class="section-title">Our Core Focus</h2> <div class="services-grid"> <div class="service-card"> <i class="fas fa-bullhorn service-icon"></i> <h3>Ad Creatives</h3> <p>Performance-driven ad creatives that don't just look good—they convert. We specialize in visuals for Meta, Google, and TikTok that grab attention and drive results.</p> </div> <div class="service-card"> <i class="fas fa-mobile-alt service-icon"></i> <h3>Social Media Designs</h3> <p>Visually stunning posts and stories designed to halt the scroll. We craft content that drives engagement, builds community, and makes your brand look exceptional.</p> </div> </div> </div> </section>
+        <section class="why-us-section"> <div class="container"> <h2 class="section-title">Why Catchy?</h2> <div class="why-us-grid"> <div class="why-us-item"> <i class="fas fa-lightbulb"></i> <h3>We Don’t Copy. We Create.</h3> <p>Original ideas are our specialty. We craft unique visuals tailored to your brand's voice and goals.</p> </div> <div class="why-us-item"> <i class="fas fa-rocket"></i> <h3>Speed is Our Default.</h3> <p>In a fast-paced world, we deliver high-quality designs on time, every time, without compromising creativity.</p> </div> <div class="why-us-item"> <i class="fas fa-magnet"></i> <h3>You Remember What We Make.</h3> <p>Our designs aren't just seen; they're remembered. We aim for lasting impact and brand recall.</p> </div> </div> </div> </section>
+        <section class="client-logos-section"> <div class="container"> <h3 class="client-logos-title">TRUSTED BY BRANDS OF ALL SIZES</h3> <div class="logos-slider"> <i class="fab fa-dribbble"></i> <i class="fab fa-google"></i> <i class="fab fa-meta"></i> <i class="fab fa-tiktok"></i> <i class="fab fa-spotify"></i> <i class="fab fa-shopify"></i> </div> </div> </section>
+        <section id="contact" class="cta-section"> <div class="container"> <h2>Got a Vision? Let’s Catch It Together.</h2> <a href="mailto:hello@catchy.design" class="cta-button-dark">Start Your Project</a> </div> </section>
+    </main>
+
+    <!-- Footer and Sticky Buttons -->
+    <div class="sticky-contact-buttons"> <a href="https://wa.me/1234567890" target="_blank" class="sticky-btn whatsapp"><i class="fab fa-whatsapp"></i></a> <a href="mailto:hello@catchy.design" class="sticky-btn email"><i class="fas fa-envelope"></i></a> </div>
+    <footer class="footer"> <div class="container footer-container"> <div class="footer-logo">Catchy</div> <div class="footer-links"> <a href="#">Home</a> <a href="#services">Services</a> <a href="#portfolio">Portfolio</a> <a href="#contact">Contact</a> </div> <div class="footer-socials"> <a href="#"><i class="fab fa-instagram"></i></a> <a href="#"><i class="fab fa-dribbble"></i></a> <a href="#"><i class="fab fa-linkedin-in"></i></a> </div> </div> <div class="footer-bottom"> <p>&copy; 2025 Catchy. All Rights Reserved.</p> </div> </footer>
+
+    <!-- ****** LIGHTBOX HTML STRUCTURE ****** -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox__close" title="Close">&times;</button>
+        <img src="" alt="Full-screen portfolio image" class="lightbox__image" id="lightbox-image">
+    </div>
+
+    <!-- ****************************************************** -->
+    <!-- ************ JAVASCRIPT & FIREBASE LOGIC ************* -->
+    <!-- ****************************************************** -->
+
+    <!-- Firebase SDK (Software Development Kit) - CDN Method -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBA_BT2u0o1IOVR1HOFSBYAdGqO2yeuz7k",
+            authDomain: "catchy-portfolio.firebaseapp.com",
+            projectId: "catchy-portfolio",
+            storageBucket: "catchy-portfolio.firebasestorage.app",
+            messagingSenderId: "34455498763",
+            appId: "1:34455498763:web:0aa78c67bcecfdba8a970e",
+            measurementId: "G-BN6GRXMQ60"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        const db = firebase.firestore();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPortfolioFromFirebase();
+
+            // Other page scripts
+            setupSmoothScroll();
+            setupSectionObserver();
+        });
+
+        async function loadPortfolioFromFirebase() {
+            try {
+                const portfolioCollection = db.collection('portfolioItems').orderBy('order', 'asc');
+                const snapshot = await portfolioCollection.get();
+
+                if (snapshot.empty) {
+                    console.log('No portfolio items found.');
+                    return;
+                }
+
+                const marqueeContents = [
+                    document.getElementById('marquee-content-1'),
+                    document.getElementById('marquee-content-2'),
+                    document.getElementById('marquee-content-3')
+                ];
+                let allItemsHTML = ['', '', '']; 
+
+                snapshot.forEach((doc, index) => {
+                    const item = doc.data();
+                    const itemHTML = `
+                        <div class="marquee__item ${item.aspectRatio}">
+                            <img src="${item.srcLow}" 
+                                 alt="${item.altText}" 
+                                 data-hover-src="${item.srcMed}" 
+                                 data-full-src="${item.srcHigh}">
+                        </div>
+                    `;
+                    allItemsHTML[index % 3] += itemHTML;
+                });
+
+                for (let i = 0; i < 3; i++) {
+                    marqueeContents[i].innerHTML = allItemsHTML[i] + allItemsHTML[i]; 
+                }
+
+                attachPortfolioEventListeners();
+
+            } catch (error) {
+                console.error("Error fetching portfolio items: ", error);
+            }
+        }
+
+        function attachPortfolioEventListeners() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const portfolioItems = document.querySelectorAll('.marquee__item');
+            const marqueeContainer = document.querySelector('.marquee-container');
+
+            const openLightbox = (fullSrc, imgAlt) => {
+                lightboxImage.src = fullSrc;
+                lightboxImage.alt = imgAlt;
+                lightbox.classList.add('active');
+                document.body.classList.add('lightbox-open');
+                marqueeContainer.classList.add('focus-locked');
+            };
+
+            const closeLightbox = () => {
+                lightbox.classList.remove('active');
+                document.body.classList.remove('lightbox-open');
+                marqueeContainer.classList.remove('focus-locked');
+            };
+
+            portfolioItems.forEach(item => {
+                const img = item.querySelector('img');
+                
+                item.addEventListener('mouseenter', () => {
+                    if (item.classList.contains('hover-loaded')) return;
+                    const hoverSrc = img.dataset.hoverSrc;
+                    if (hoverSrc) {
+                        const hoverImage = new Image();
+                        hoverImage.src = hoverSrc;
+                        hoverImage.onload = () => {
+                            img.src = hoverSrc;
+                            item.classList.add('hover-loaded'); 
+                        };
+                    }
+                }, { once: true });
+
+                item.addEventListener('click', () => {
+                    const fullSrc = img.dataset.fullSrc || img.src;
+                    openLightbox(fullSrc, img.alt);
+                });
+            });
+            
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target.classList.contains('lightbox__close') || e.target.id === 'lightbox-image') {
+                    closeLightbox();
+                }
+            });
+        }
+        
+        function setupSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        }
+        
+        function setupSectionObserver() {
+            const sections = document.querySelectorAll('section:not(.portfolio-marquee-section)');
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                section.style.opacity = 0;
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(section);
+            });
+        }
+    </script>
+
+</body>
+</html>
