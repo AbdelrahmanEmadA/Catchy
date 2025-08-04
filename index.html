@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catchy | Ad & Social Media Design Specialists</title>
 
-    <!-- Google Fonts: Poppins -->
+    <!-- Google Fonts: Poppins & Architects Daughter for the new section -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;7700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;7700;800&family=Architects+Daughter&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome for Icons (Still needed for footer etc.) -->
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
@@ -20,12 +20,12 @@
             --background-color: #000000; /* Pure Black */
             --text-color: #FFFFFF;
             --white: #FFFFFF;
-            --dark-grey: #111111; /* Very dark grey for accents */
-            --card-color: #1a1a1a; /* Dark card background */
+            --dark-grey: #111111;
+            --card-color: #1a1a1a;
             --font-family: 'Poppins', sans-serif;
             --container-width: 1200px;
             --border-radius: 12px; 
-            --transition-speed: 0.7s; /* Slower for a more luxurious feel */
+            --transition-speed: 0.7s;
             --transition-timing: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
@@ -35,7 +35,7 @@
         .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
         .section-title { font-size: 2.8rem; font-weight: 800; text-align: center; margin-bottom: 60px; color: var(--white); }
 
-        /* --- HERO & NAVBAR (MERGED WITH PORTFOLIO) --- */
+        /* --- HERO & NAVBAR --- */
         .hero-section { min-height: 100vh; background: var(--background-color); display: flex; flex-direction: column; color: var(--white); overflow: hidden; }
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; }
         .logo { font-size: 1.8rem; font-weight: 800; text-decoration: none; color: var(--primary-color); }
@@ -46,224 +46,184 @@
         .hero-subheadline { font-size: 1.2rem; max-width: 600px; margin: 20px 0 30px; color: #e5e5e5; }
         .cta-button { background-color: var(--primary-color); color: var(--white); padding: 15px 35px; font-size: 1.1rem; font-weight: 600; text-decoration: none; border-radius: 50px; transition: transform 0.3s, box-shadow 0.3s; display: inline-block; }
         .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(229, 9, 20, 0.2); }
-        
-        .hero-cta-container {
-            text-align: center;
-            padding: 4vh 20px 8vh;
-        }
+        .hero-cta-container { text-align: center; padding: 4vh 20px 8vh; }
 
         /* --- INFINITE MARQUEE PORTFOLIO --- */
-        .marquee-container { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 30px; 
-            perspective: 1000px;
-        }
-        .marquee__row { 
-            display: flex; 
-            transform-style: preserve-3d;
-        }
-        .marquee__content { 
-            display: flex; 
-            gap: 30px; 
-            flex-shrink: 0; 
-            animation: linear infinite; 
-        }
-        .marquee-container.focus-locked .marquee__content {
-             animation-play-state: paused;
-        }
+        .marquee-container { display: flex; flex-direction: column; gap: 30px; perspective: 1000px; }
+        .marquee__row { display: flex; transform-style: preserve-3d; }
+        .marquee__content { display: flex; gap: 30px; flex-shrink: 0; animation: linear infinite; }
+        .marquee-container.focus-locked .marquee__content { animation-play-state: paused; }
         @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         @keyframes scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
         .marquee__row--1 .marquee__content { animation-name: scroll-left; animation-duration: 120s; }
         .marquee__row--2 .marquee__content { animation-name: scroll-right; animation-duration: 140s; }
         .marquee__row--3 .marquee__content { animation-name: scroll-left; animation-duration: 110s; }
-
-        .marquee__item {
-            position: relative; height: 350px; flex-shrink: 0;
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            cursor: pointer;
-            transition: transform 0.5s var(--transition-timing), 
-                        filter 0.5s var(--transition-timing),
-                        box-shadow 0.5s var(--transition-timing);
-        }
-        
-        .marquee__item:hover {
-            transform: translateZ(60px) scale(1.05);
-            z-index: 10;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-        }
-        
+        .marquee__item { position: relative; height: 350px; flex-shrink: 0; border-radius: var(--border-radius); box-shadow: 0 10px 30px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.5s var(--transition-timing), filter 0.5s var(--transition-timing), box-shadow 0.5s var(--transition-timing); }
+        .marquee__item:hover { transform: translateZ(60px) scale(1.05); z-index: 10; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
         .aspect-16-9 { aspect-ratio: 16 / 9; } .aspect-3-4 { aspect-ratio: 3 / 4; } .aspect-1-1 { aspect-ratio: 1 / 1; }
         .marquee__item img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--border-radius); }
         
-        /* --- FULL SCREEN LIGHTBOX STYLES --- */
-        .lightbox {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); z-index: 2000;
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.3s ease-in-out;
-        }
+        /* --- LIGHTBOX --- */
+        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out; }
         .lightbox.active { opacity: 1; pointer-events: all; }
-        .lightbox__image {
-            display: block; max-width: 90%; max-height: 90%;
-            object-fit: contain; box-shadow: 0 0 50px rgba(0,0,0,0.5);
-            border-radius: var(--border-radius); transform: scale(0.95);
-            transition: transform 0.3s ease-in-out;
-            cursor: pointer; 
-        }
+        .lightbox__image { display: block; max-width: 90%; max-height: 90%; object-fit: contain; box-shadow: 0 0 50px rgba(0,0,0,0.5); border-radius: var(--border-radius); transform: scale(0.95); transition: transform 0.3s ease-in-out; cursor: pointer; }
         .lightbox.active .lightbox__image { transform: scale(1); }
-        .lightbox__close {
-            position: absolute; top: 20px; right: 30px;
-            font-size: 3rem; color: var(--white); background: none;
-            border: none; cursor: pointer; line-height: 1;
-        }
+        .lightbox__close { position: absolute; top: 20px; right: 30px; font-size: 3rem; color: var(--white); background: none; border: none; cursor: pointer; line-height: 1; }
 
-        /* --- SIMPLE SECTION DIVIDER --- */
-        .section-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 20px;
-            margin: 20px 0 60px 0;
-        }
-        .section-divider::before,
-        .section-divider::after {
-            content: '';
-            flex-grow: 1;
-            height: 1px;
-            background-color: #333;
-            max-width: 200px;
-        }
-        .divider-shape {
-            width: 12px;
-            height: 12px;
-            background-color: var(--primary-color);
-            transform: rotate(45deg);
-            margin: 0 25px;
-        }
+        /* --- SECTION DIVIDER --- */
+        .section-divider { display: flex; align-items: center; justify-content: center; padding: 0 20px; margin: 20px 0 60px 0; }
+        .section-divider::before, .section-divider::after { content: ''; flex-grow: 1; height: 1px; background-color: #333; max-width: 200px; }
+        .divider-shape { width: 12px; height: 12px; background-color: var(--primary-color); transform: rotate(45deg); margin: 0 25px; }
         
-        /* --- ============================================================== --- */
-        /* --- START: IDEA 2 - HORIZONTAL EXPANDING PANELS SERVICES SECTION --- */
-        /* --- ============================================================== --- */
-        
-        .services-section {
-            padding: 80px 0;
-            background-color: var(--background-color);
-        }
-
-        .services-panels-container {
-            display: flex;
-            width: 100%;
-            height: 650px; /* A fixed height for the effect */
-            gap: 10px; /* The space between panels */
-        }
-        
-        .service-panel {
-            position: relative;
-            flex: 1; /* Initially, all panels share space equally */
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            cursor: pointer;
-            transition: flex var(--transition-speed) var(--transition-timing);
-        }
-
-        .service-panel:hover {
-            flex: 5; /* The hovered panel expands to take more space */
-        }
-        
-        .panel-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            border-radius: var(--border-radius);
-            transform: scale(1.1);
-            transition: transform var(--transition-speed) var(--transition-timing), 
-                        opacity var(--transition-speed) var(--transition-timing);
-            opacity: 0.2; /* Dim by default */
-        }
-        
-        .service-panel:hover .panel-bg {
-            transform: scale(1); /* Zoom out to normal on hover */
-            opacity: 0.5; /* Make it more visible on hover */
-        }
-        
-        /* --- PLACEHOLDER FOR AD CREATIVES PANEL --- */
-        .panel-bg.ad-creative { 
-             background-color: #111; /* Placeholder background color */
-             /* --- PASTE YOUR IMAGE URL BETWEEN THE QUOTES --- */
-             background-image: url('ad creatives.jpg'); 
-        }
+        /* --- SERVICES SECTION --- */
+        .services-section { padding: 80px 0; background-color: var(--background-color); }
+        .services-panels-container { display: flex; width: 100%; height: 650px; gap: 10px; }
+        .service-panel { position: relative; flex: 1; border-radius: var(--border-radius); overflow: hidden; cursor: pointer; transition: flex var(--transition-speed) var(--transition-timing); }
+        .service-panel:hover { flex: 5; }
+        .panel-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; border-radius: var(--border-radius); transform: scale(1.1); transition: transform var(--transition-speed) var(--transition-timing), opacity var(--transition-speed) var(--transition-timing); opacity: 0.2; }
+        .service-panel:hover .panel-bg { transform: scale(1); opacity: 0.5; }
+        .panel-bg.ad-creative { background-image: url('ad creatives.jpg'); }
         .panel-bg.social-media { background-image: url('https://images.unsplash.com/photo-1611262588024-d12430b98920?q=80&w=2574&auto=format&fit=crop'); }
         .panel-bg.web-dev { background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2670&auto=format&fit=crop'); }
+        .panel-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; color: var(--white); background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%); }
+        .panel-content h3 { font-size: 2.5rem; font-weight: 800; line-height: 1; margin-bottom: 20px; transform: translateY(40px); transition: transform 0.5s var(--transition-timing); }
+        .panel-content p { max-width: 400px; font-size: 1.1rem; line-height: 1.7; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease-out 0.2s, transform 0.4s ease-out 0.2s; }
+        .service-panel:hover .panel-content h3, .service-panel:hover .panel-content p { opacity: 1; transform: translateY(0); }
 
-        .panel-content {
-            position: relative;
-            z-index: 2;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end; /* Align content to the bottom */
-            padding: 40px;
-            color: var(--white);
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%); /* Added gradient for readability */
-        }
-        
-        .panel-content h3 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            line-height: 1;
-            margin-bottom: 20px;
-            transform: translateY(40px);
-            transition: transform 0.5s var(--transition-timing);
-        }
-        
-        .panel-content p {
-            max-width: 400px;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            /* Hide description by default */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.4s ease-out 0.2s, transform 0.4s ease-out 0.2s; /* Delay the transition */
-        }
-
-        /* The hover magic for the content */
-        .service-panel:hover .panel-content h3 {
-            transform: translateY(0);
-        }
-        .service-panel:hover .panel-content p {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- ============================================================ --- */
-        /* --- END: IDEA 2 - HORIZONTAL EXPANDING PANELS SERVICES SECTION --- */
-        /* --- ============================================================ --- */
-
+        /* --- WHY US & LOGOS --- */
         .why-us-section { padding: 80px 0; } 
         .why-us-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; text-align: center; } 
         .why-us-item i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; } 
         .why-us-item h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--white); } 
         .why-us-item p { color: #ccc; } 
-        .client-logos-section { padding: 40px 0; background-color: var(--background-color); } 
+        .client-logos-section { padding: 40px 0; } 
         .client-logos-title { text-align: center; font-weight: 500; color: #888; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; } 
         .logos-slider { display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 30px; font-size: 2.5rem; color: #777; } 
         .logos-slider i:hover { color: var(--white); } 
-        .cta-section { padding: 80px 20px; background: var(--primary-color); text-align: center; color: var(--white); } 
-        .cta-button-dark { background-color: var(--card-color); color: var(--white); padding: 15px 35px; font-size: 1.1rem; font-weight: 600; text-decoration: none; border-radius: 50px; transition: background-color 0.3s, transform 0.3s; } 
-        .cta-button-dark:hover { background-color: #333; transform: translateY(-3px); } 
+
+        /* --- ================================================================== --- */
+        /* --- START: IDEA 2 - "THE BLUEPRINT" INTERACTIVE CONTACT SECTION --- */
+        /* --- ================================================================== --- */
+        .contact-blueprint-section {
+            --spotlight-color: rgba(229, 9, 20, 0.15); /* Primary color with low opacity */
+            --grid-color: rgba(255, 255, 255, 0.07);
+            --grid-size: 50px;
+            
+            position: relative;
+            padding: 100px 20px;
+            background-color: #080c13; /* Dark blueprint-like blue */
+            overflow: hidden;
+
+            /* The interactive spotlight effect */
+            background-image: 
+                radial-gradient(
+                    circle at var(--x, 50%) var(--y, 50%),
+                    var(--spotlight-color) 0%,
+                    transparent 30%
+                ),
+                linear-gradient(var(--grid-color) 1px, transparent 1px), 
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 
+                100% 100%, /* Spotlight layer */
+                var(--grid-size) var(--grid-size), 
+                var(--grid-size) var(--grid-size);
+            animation: move-grid 20s linear infinite;
+        }
+        
+        @keyframes move-grid {
+            from { background-position: 0 0; }
+            to { background-position: var(--grid-size) var(--grid-size); }
+        }
+
+        .blueprint-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(10, 15, 25, 0.5);
+            backdrop-filter: blur(5px);
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .blueprint-content h2 {
+            font-family: 'Architects Daughter', cursive;
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            color: var(--white);
+            font-weight: 400; /* This font looks best at a normal weight */
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        /* Little decorative "design artifact" */
+        .blueprint-content h2::after {
+            content: '+';
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            font-size: 2rem;
+            color: var(--primary-color);
+            opacity: 0.5;
+            transform: rotate(15deg);
+        }
+
+        .blueprint-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: #ccc;
+        }
+
+        .blueprint-cta {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px; /* A more "blocky" feel */
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            border: 2px solid transparent;
+            position: relative;
+        }
+        
+        .blueprint-cta:hover {
+            background-color: transparent;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* Hand-drawn arrow annotation */
+        .blueprint-cta::before {
+            content: '>';
+            font-family: 'Architects Daughter', cursive;
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #666;
+            transition: color 0.3s;
+        }
+        .blueprint-cta:hover::before {
+            color: var(--primary-color);
+        }
+
+        /* --- ================================================================== --- */
+        /* --- END: IDEA 2 - "THE BLUEPRINT" INTERACTIVE CONTACT SECTION --- */
+        /* --- ================================================================== --- */
+
         .sticky-contact-buttons { position: fixed; bottom: 30px; right: 30px; z-index: 1000; display: flex; flex-direction: column; gap: 10px; } 
         .sticky-btn { width: 50px; height: 50px; border-radius: 50%; color: var(--white); display: flex; justify-content: center; align-items: center; font-size: 1.5rem; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.15); transition: transform 0.3s; } 
         .sticky-btn:hover { transform: scale(1.1); } 
         .whatsapp { background-color: #25D366; } 
         .email { background-color: var(--primary-color); } 
-        .footer { background: var(--background-color); color: #aaa; padding: 60px 0 20px; border-top: 1px solid #333; } 
+        .footer { background: #080c13; color: #aaa; padding: 60px 0 20px; border-top: 1px solid #333; } 
         .footer-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; } 
         .footer-logo { font-size: 1.8rem; font-weight: 800; color: var(--primary-color); } 
         .footer-links a { color: #aaa; text-decoration: none; margin: 0 15px; transition: color 0.3s; } 
@@ -277,10 +237,11 @@
             .hero-headline { font-size: 2.8rem; } 
             .marquee__item { height: 250px; } 
             .marquee-container, .marquee__content { gap: 20px; }
-            .services-panels-container { flex-direction: column; height: auto; } /* Stack panels vertically on smaller screens */
+            .services-panels-container { flex-direction: column; height: auto; }
             .service-panel { min-height: 250px; }
-            .service-panel:hover { flex: 3; } /* Less aggressive expansion on mobile */
+            .service-panel:hover { flex: 3; }
             .panel-content h3 { font-size: 2rem; }
+            .contact-blueprint-section { background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); } /* Disable spotlight on mobile */
         }
 
         @media (max-width: 480px) { 
@@ -288,6 +249,8 @@
             .hero-headline { font-size: 2.2rem; } 
             .marquee__item { height: 200px; }
             .service-panel { min-height: 200px; }
+            .blueprint-content { padding: 30px 20px; }
+            .blueprint-cta::before { display: none; } /* Hide arrow on small screens */
         }
     </style>
 </head>
@@ -301,9 +264,9 @@
             <p class="hero-subheadline">We create bold, fast, and catchy visuals for any brand, product, or platform.</p>
         </div>
 
-        <!-- ****** INFINITE MARQUEE PORTFOLIO (PART OF HERO) ****** -->
+        <!-- ****** INFINITE MARQUEE PORTFOLIO ****** -->
         <div class="marquee-container" id="portfolio">
-            <!-- ROW 1 -->
+             <!-- ROW 1 -->
             <div class="marquee__row marquee__row--1"><div class="marquee__content">
                 <div class="marquee__item aspect-3-4"><img src="كل نفس بيطفي فيك حاجة.jpg" alt="Portfolio Image 1" data-full-src="كل نفس بيطفي فيك حاجة-full.jpg"></div>
                 <div class="marquee__item aspect-16-9"><img src="بنجيك وين ما تكون الجليد.jpg" alt="Portfolio Image 2" data-full-src="بنجيك وين ما تكون الجليد-full.jpg"></div>
@@ -353,7 +316,7 @@
                 <div class="marquee__item aspect-3-4"><img src="Jungle.jpg" alt="Portfolio Image 22" data-full-src="Jungle-full.jpg"></div>
                 <div class="marquee__item aspect-3-4"><img src="RUFFLES.jpg" alt="Portfolio Image 23" data-full-src="RUFFLES-full.jpg"></div>
                 <div class="marquee__item aspect-3-4"><img src="MMA.jpg" alt="Portfolio Image 24" data-full-src="MMA-full.jpg"></div>
-                <div class="marquee__item aspect-3-4"><img src="التلوث.jpg" alt="Portfolio Image 25" data-full-src="التلوث-full.jpg"></div>
+                <div class="marquee__item aspect-3-4"><img src="التلوث.jpg" alt="Portfolio Image 25" data-full-src="التلوث.jpg"></div>
                 <!-- DUPLICATE -->
                 <div class="marquee__item aspect-16-9"><img src="بنجيك وين ما تكون الجليد.jpg" alt="Portfolio Image 18" data-full-src="بنجيك وين ما تكون-full.jpg"></div>
                 <div class="marquee__item aspect-3-4"><img src="كأنك بتضحك في جنازتك.jpg" alt="Portfolio Image 19" data-full-src="كأنك بتضحك في جنازتك-full.jpg"></div>
@@ -371,61 +334,40 @@
         </div>
     </header>
 
-    <!-- ------ START: SECTION DIVIDER ------ -->
     <div class="section-divider">
         <div class="divider-shape"></div>
     </div>
-    <!-- ------ END: SECTION DIVIDER ------ -->
 
     <main>
-        <!-- ------ START: THE NEW "WOW" SERVICES SECTION (IDEA 2) ------ -->
         <section id="services" class="services-section">
             <div class="container">
                 <h2 class="section-title">Our Core Focus</h2>
                 <div class="services-panels-container">
-                    
-                    <!-- Panel 1: Ad Creatives -->
-                    <div class="service-panel">
-                        <div class="panel-bg ad-creative"></div>
-                        <div class="panel-content">
-                            <h3>Ad Creatives</h3>
-                            <p>Performance-driven ad creatives that don't just look good—they convert. We specialize in visuals for Meta, Google, and TikTok.</p>
-                        </div>
-                    </div>
-
-                    <!-- Panel 2: Social Media -->
-                    <div class="service-panel">
-                        <div class="panel-bg social-media"></div>
-                         <div class="panel-content">
-                            <h3>Social Media</h3>
-                            <p>Visually stunning posts and stories designed to halt the scroll. We craft content that drives engagement and builds community.</p>
-                        </div>
-                    </div>
-
-                    <!-- Panel 3: Web Development -->
-                    <div class="service-panel">
-                        <div class="panel-bg web-dev"></div>
-                         <div class="panel-content">
-                            <h3>Web Development</h3>
-                            <p>We build complete websites from scratch. From initial design to final launch, we deliver a fast, responsive, and user-friendly online presence.</p>
-                        </div>
-                    </div>
-
+                    <div class="service-panel"><div class="panel-bg ad-creative"></div><div class="panel-content"><h3>Ad Creatives</h3><p>Performance-driven ad creatives that don't just look good—they convert. We specialize in visuals for Meta, Google, and TikTok.</p></div></div>
+                    <div class="service-panel"><div class="panel-bg social-media"></div><div class="panel-content"><h3>Social Media</h3><p>Visually stunning posts and stories designed to halt the scroll. We craft content that drives engagement and builds community.</p></div></div>
+                    <div class="service-panel"><div class="panel-bg web-dev"></div><div class="panel-content"><h3>Web Development</h3><p>We build complete websites from scratch. From initial design to final launch, we deliver a fast, responsive, and user-friendly online presence.</p></div></div>
                 </div>
             </div>
         </section>
-        <!-- ------ END: THE NEW "WOW" SERVICES SECTION (IDEA 2) ------ -->
 
         <section class="why-us-section"> <div class="container"> <h2 class="section-title">Why Catchy?</h2> <div class="why-us-grid"> <div class="why-us-item"> <i class="fas fa-lightbulb"></i> <h3>We Don’t Copy. We Create.</h3> <p>Original ideas are our specialty. We craft unique visuals tailored to your brand's voice and goals.</p> </div> <div class="why-us-item"> <i class="fas fa-rocket"></i> <h3>Speed is Our Default.</h3> <p>In a fast-paced world, we deliver high-quality designs on time, every time, without compromising creativity.</p> </div> <div class="why-us-item"> <i class="fas fa-magnet"></i> <h3>You Remember What We Make.</h3> <p>Our designs aren't just seen; they're remembered. We aim for lasting impact and brand recall.</p> </div> </div> </div> </section>
         <section class="client-logos-section"> <div class="container"> <h3 class="client-logos-title">TRUSTED BY BRANDS OF ALL SIZES</h3> <div class="logos-slider"> <i class="fab fa-dribbble"></i> <i class="fab fa-google"></i> <i class="fab fa-meta"></i> <i class="fab fa-tiktok"></i> <i class="fab fa-spotify"></i> <i class="fab fa-shopify"></i> </div> </div> </section>
-        <section id="contact" class="cta-section"> <div class="container"> <h2>Got a Vision? Let’s Catch It Together.</h2> <a href="mailto:hello@catchy.design" class="cta-button-dark">Start Your Project</a> </div> </section>
+        
+        <!-- ------ START: "THE BLUEPRINT" CONTACT SECTION ------ -->
+        <section id="contact" class="contact-blueprint-section">
+            <div class="blueprint-content">
+                <h2>Let's Draft Your Success.</h2>
+                <p>Your big idea is waiting to be built. We're the architects who can bring it to life with designs that are both beautiful and effective. Let's start the conversation.</p>
+                <a href="mailto:hello@catchy.design" class="blueprint-cta">Start Your Project</a>
+            </div>
+        </section>
+        <!-- ------ END: "THE BLUEPRINT" CONTACT SECTION ------ -->
+
     </main>
 
-    <!-- Footer and Sticky Buttons -->
     <div class="sticky-contact-buttons"> <a href="https://wa.me/1234567890" target="_blank" class="sticky-btn whatsapp"><i class="fab fa-whatsapp"></i></a> <a href="mailto:hello@catchy.design" class="sticky-btn email"><i class="fas fa-envelope"></i></a> </div>
     <footer class="footer"> <div class="container footer-container"> <div class="footer-logo">Catchy</div> <div class="footer-links"> <a href="#">Home</a> <a href="#services">Services</a> <a href="#portfolio">Portfolio</a> <a href="#contact">Contact</a> </div> <div class="footer-socials"> <a href="#"><i class="fab fa-instagram"></i></a> <a href="#"><i class="fab fa-dribbble"></i></a> <a href="#"><i class="fab fa-linkedin-in"></i></a> </div> </div> <div class="footer-bottom"> <p>&copy; 2025 Catchy. All Rights Reserved.</p> </div> </footer>
 
-    <!-- ****** LIGHTBOX HTML STRUCTURE ****** -->
     <div class="lightbox" id="lightbox">
         <button class="lightbox__close" title="Close">&times;</button>
         <img src="" alt="Full-screen portfolio image" class="lightbox__image" id="lightbox-image">
@@ -441,7 +383,7 @@
                 });
             });
 
-            // --- LIGHTBOX AND IMAGE LOADING LOGIC ---
+            // --- LIGHTBOX LOGIC ---
             const lightbox = document.getElementById('lightbox');
             const lightboxImage = document.getElementById('lightbox-image');
             const portfolioItems = document.querySelectorAll('.marquee__item');
@@ -465,8 +407,7 @@
                 const img = item.querySelector('img');
                 item.addEventListener('click', () => {
                     const fullSrc = img.dataset.fullSrc || img.src;
-                    const altText = img.alt;
-                    openLightbox(fullSrc, altText);
+                    openLightbox(fullSrc, img.alt);
                 });
             });
             
@@ -476,8 +417,8 @@
                 }
             });
 
-            // --- FADE-IN FOR OTHER SECTIONS ---
-            const sections = document.querySelectorAll('main > section');
+            // --- FADE-IN FOR SECTIONS ---
+            const sections = document.querySelectorAll('main > section:not(.contact-blueprint-section)');
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -495,6 +436,16 @@
                 section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
                 observer.observe(section);
             });
+            
+            // --- BLUEPRINT CONTACT SECTION MOUSE SPOTLIGHT ---
+            const blueprintSection = document.querySelector('.contact-blueprint-section');
+            if (blueprintSection) {
+                 blueprintSection.addEventListener('mousemove', e => {
+                    const { left, top } = blueprintSection.getBoundingClientRect();
+                    blueprintSection.style.setProperty('--x', e.clientX - left + 'px');
+                    blueprintSection.style.setProperty('--y', e.clientY - top + 'px');
+                });
+            }
         });
     </script>
 </body>
